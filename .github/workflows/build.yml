@@ -1,0 +1,29 @@
+name: Build Extension
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Make build script executable
+      run: chmod +x build.sh
+      
+    - name: Run build script
+      run: ./build.sh -v 2.2.2
+      
+    - name: Upload Chrome extension artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: find-chrome-extension
+        path: .build/find-chrome.zip
+       
+    - name: Generate attestation for Chrome extension
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-path: .build/find-chrome.zip
