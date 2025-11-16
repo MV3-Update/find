@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+>  This fork is intented to produce a Manifest V3 (MV3) version of the original Chrome extension. It is not intented to fix bugs unreleated to that particular issue.
+
 <img src="resources/icon.png" align="right" width="128" />
 
 # **{find+}**
