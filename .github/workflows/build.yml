@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
   attestations: write
 
@@ -32,3 +32,15 @@ jobs:
       uses: actions/attest-build-provenance@v1
       with:
         subject-path: .build/find-chrome.zip
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v2.2.2
+        target_commitish: ${{ github.ref_name }}
+        generate_release_notes: true
+        draft: true
+        files: |
+          .build/find-chrome.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
